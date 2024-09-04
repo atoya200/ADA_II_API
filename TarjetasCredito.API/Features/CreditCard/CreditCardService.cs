@@ -9,11 +9,13 @@ namespace TarjetasCredito.API.Features.CreditCard
         private readonly Faker<CreditCard> _faker;
         private readonly RngService _rngService;
         private readonly PersonService _personService;
+        private readonly CreditCardChargesService _creditCardChargesService;
 
-        public CreditCardService(RngService rngService, PersonService personService)
+        public CreditCardService(RngService rngService, PersonService personService, CreditCardChargesService creditCardChargesService)
         {
             _rngService = rngService;
             _personService = personService;
+            _creditCardChargesService = creditCardChargesService;
 
             _faker = new Faker<CreditCard>()
                 .RuleFor(p => p.Id, f => _rngService.GetRandomInt(100_000_000, 999_999_999))

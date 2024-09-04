@@ -1,3 +1,5 @@
+using TarjetasCredito.API.Features.CreditCard;
+using TarjetasCredito.API.Features.Person;
 using TarjetasCredito.API.Features.Rng;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<RngService>();
+builder.Services.AddTransient<PersonService>();
+builder.Services.AddTransient<CreditCardService>();
+builder.Services.AddTransient<CreditCardChargesService>();
 
 var app = builder.Build();
 
