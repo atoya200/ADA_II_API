@@ -11,5 +11,28 @@ namespace TarjetasCredito.API.Features.CreditCard
         {
             return creditCardService.GenerateCreditCard();
         }
+
+        [HttpPost("{id}/pay")]
+        public IActionResult PayCreditCard(string id, int amount)
+        {
+            return Ok("Payment succesfull");
+        }
+
+        [HttpPatch("{id}/SetStatus")]
+        public IActionResult ChangeStatus(bool status)
+        {
+            string x = string.Empty;
+
+            if (status)
+            {
+                x = "Enabled";
+            }
+            else
+            {
+                x = "Disabled";
+            }
+
+            return Ok($"The credit card is now {x}");
+        }
     }
 }

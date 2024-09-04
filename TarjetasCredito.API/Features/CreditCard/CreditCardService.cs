@@ -34,5 +34,10 @@ namespace TarjetasCredito.API.Features.CreditCard
         {
             return _faker.Generate();
         }
+
+        public List<CreditCard> GenerateCreditCards(int amount)
+        {
+            return _faker.Generate(amount).ToList();
+        }
     }
 }
