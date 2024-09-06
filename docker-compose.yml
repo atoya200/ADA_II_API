@@ -1,0 +1,10 @@
+﻿services:
+  tarjetascredito.api:
+    image: tarjetascredito.api
+    build:
+      context: .
+      dockerfile: TarjetasCredito.API/Dockerfile
+    ports:
+      - "8080:8080" # Map HTTP port
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
