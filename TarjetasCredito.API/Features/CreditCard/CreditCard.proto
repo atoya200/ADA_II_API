@@ -24,5 +24,22 @@ message GetCreditCardReply {
   string expirationDate = 6;
   bool enabled = 7;
   string issuer = 8;
-  // List<CreditCardCharge> creditCardCharges = 9;
+  repeated CreditCardCharge creditCardCharges = 9;
+}
+
+message CreditCardCharge {
+	int32 id = 1;
+	double price = 2;
+	int32 installments = 3;
+	string business = 4;
+	ChargeDate dateOfPurchase = 5;
+}
+
+message ChargeDate {
+	int32 year = 1;
+	int32 month = 2;
+	int32 day = 3;
+	int32 dayOfWeek = 4;
+	int32 dayOfYear = 5;
+	int32 dayNumber = 6;
 }

@@ -24,10 +24,28 @@ namespace TarjetasCredito.API.Features.GrpcCreditCard
                     Phone = result.Person.Phone,
                 },
                 CloseDate = result.CloseDate,
-                ExpirationDate = "11/2046",
+                ExpirationDate = result.ExpirationDate.ToString("MM/yy"),
                 Enabled = result.Enabled,
                 Issuer = result.Issuer
             };
+
+            reply.CreditCardCharges.AddRange(
+                result.CreditCardCharges.Select(x => new GrpcCreditCard.CreditCardCharge
+                {
+                    Id = Convert.ToInt32(x.Id),
+                    Price = x.Price,
+                    Installments = x.Installments,
+                    Business = x.Business,
+                    DateOfPurchase = new ChargeDate
+                    {
+                        Year = x.DateOfPurchase.Year,
+                        Month = x.DateOfPurchase.Month,
+                        Day = x.DateOfPurchase.Day,
+                        DayOfWeek = Convert.ToInt32(x.DateOfPurchase.DayOfWeek.ToString()),
+                        DayOfYear = x.DateOfPurchase.DayOfYear,
+                        DayNumber = x.DateOfPurchase.DayNumber
+                    }
+                }));
 
             return Task.FromResult(reply);
         }
