@@ -1,4 +1,7 @@
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 using TarjetasCredito.API.Features.CreditCard;
+using TarjetasCredito.API.Features.GrpcCreditCard;
 using TarjetasCredito.API.Features.Person;
 using TarjetasCredito.API.Features.Rng;
 
@@ -14,15 +17,16 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
     // Set the comments path for the Swagger JSON and UI.
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
+    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    //c.IncludeXmlComments(xmlPath);
 });
 
 builder.Services.AddTransient<RngService>();
 builder.Services.AddTransient<PersonService>();
 builder.Services.AddTransient<CreditCardService>();
 builder.Services.AddTransient<CreditCardChargesService>();
+builder.Services.AddGrpc();
 
 var app = builder.Build();
 
@@ -42,5 +46,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGrpcService<CreditCardGrpcService>();
 
 app.Run();

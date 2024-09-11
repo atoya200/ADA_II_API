@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "TarjetasCredito.API.Features.GrpcPerson";
+
+package GrpcPerson;
+
+service PersonProtobuf {
+	rpc GetById (GetPersonRequest) returns (GetPersonReply);
+}
+
+message GetPersonRequest {
+	int32 id = 1;
+}
+
+message GetPersonReply {
+	int32 id = 1;
+	string firstName = 2;
+	string lastName = 3;
+	string email = 4;
+	string phone = 5;
+}

@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using TarjetasCredito.API.Features.Rng;
+using Grpc.Core;
 
 namespace TarjetasCredito.API.Features.Person;
 

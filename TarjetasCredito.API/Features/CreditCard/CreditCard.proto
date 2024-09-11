@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "TarjetasCredito.API.Features.GrpcCreditCard";
+
+package GrpcCreditCard;
+
+import "Features/Person/Person.proto";
+
+service CreditCardProtobuf {
+  // Gets credit card info by ID
+  rpc GetCreditCard (GetCreditCardRequest) returns (GetCreditCardReply);
+}
+
+message GetCreditCardRequest {
+  int32 id = 1;
+}
+
+message GetCreditCardReply {
+  int32 id = 1;
+  int64 number = 2;
+  int32 limit = 3;
+  GrpcPerson.GetPersonReply person = 4;
+  int32 closeDate = 5;
+  string expirationDate = 6;
+  bool enabled = 7;
+  string issuer = 8;
+  // List<CreditCardCharge> creditCardCharges = 9;
+}
