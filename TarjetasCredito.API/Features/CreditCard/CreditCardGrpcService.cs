@@ -32,7 +32,7 @@ namespace TarjetasCredito.API.Features.GrpcCreditCard
             reply.CreditCardCharges.AddRange(
                 result.CreditCardCharges.Select(x => new GrpcCreditCard.CreditCardCharge
                 {
-                    Id = Convert.ToInt32(x.Id),
+                    Id = (int) x.Id,
                     Price = x.Price,
                     Installments = x.Installments,
                     Business = x.Business,
@@ -41,13 +41,29 @@ namespace TarjetasCredito.API.Features.GrpcCreditCard
                         Year = x.DateOfPurchase.Year,
                         Month = x.DateOfPurchase.Month,
                         Day = x.DateOfPurchase.Day,
-                        DayOfWeek = Convert.ToInt32(x.DateOfPurchase.DayOfWeek.ToString()),
+                        DayOfWeek = (int) x.DateOfPurchase.DayOfWeek,
                         DayOfYear = x.DateOfPurchase.DayOfYear,
                         DayNumber = x.DateOfPurchase.DayNumber
                     }
                 }));
 
             return Task.FromResult(reply);
+        }
+
+        public override Task<PayCreditCardReply> PayCreditCard(PayCreditCardRequest request, ServerCallContext context)
+        {
+            return Task.FromResult(new PayCreditCardReply
+            {
+                Message = $"Payment of $ {request.Amount} for credit card with Id {request.Id} was successful."
+            });
+        }
+
+        public override Task<SetCardStatusReply> SetCardStatus(SetCardStatusRequest request, ServerCallContext context)
+        {
+            return Task.FromResult(new SetCardStatusReply
+            {
+                Message = $"The credit card with Id {request.Id} is now {(request.Enabled ? "Enabled" : "Disabled")}"
+            });
         }
     }
 }

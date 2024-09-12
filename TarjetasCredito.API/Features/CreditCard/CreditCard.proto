@@ -9,6 +9,8 @@ import "Features/Person/Person.proto";
 service CreditCardProtobuf {
   // Gets credit card info by ID
   rpc GetCreditCard (GetCreditCardRequest) returns (GetCreditCardReply);
+  rpc PayCreditCard (PayCreditCardRequest) returns (PayCreditCardReply);
+  rpc SetCardStatus (SetCardStatusRequest) returns (SetCardStatusReply);
 }
 
 message GetCreditCardRequest {
@@ -25,6 +27,24 @@ message GetCreditCardReply {
   bool enabled = 7;
   string issuer = 8;
   repeated CreditCardCharge creditCardCharges = 9;
+}
+
+message PayCreditCardRequest {
+	int32 id = 1;
+	double amount = 2;
+}
+
+message PayCreditCardReply {
+	string message = 1;
+}
+
+message SetCardStatusRequest {
+	int32 id = 1;
+	bool enabled = 2;
+}
+
+message SetCardStatusReply {
+	string message = 1;
 }
 
 message CreditCardCharge {

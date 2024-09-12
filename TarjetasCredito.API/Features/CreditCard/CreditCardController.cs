@@ -15,7 +15,7 @@ namespace TarjetasCredito.API.Features.CreditCard
         [HttpPost("{id}/pay")]
         public IActionResult PayCreditCard(string id, int amount)
         {
-            return Ok("Payment succesfull");
+            return Ok("Payment succesful");
         }
 
         [HttpPatch("{id}/SetStatus")]
